@@ -125,7 +125,7 @@ Foram identificadas e tratadas as seguintes inconsistências:
 
 ## Bases Geradas para o BI 
 
-Além das respostas obrigatórias, o pipeline gera três visões consolidadas prontas para uso no Looker Studio:
+O pipeline gera três visões consolidadas prontas para uso no Looker Studio:
 
 | Arquivo | Conteúdo |
 |---|---|
