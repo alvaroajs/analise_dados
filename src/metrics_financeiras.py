@@ -4,7 +4,7 @@ import os
 def gerar_visao_geografica():
     print("  Lendo bases de pedidos e clientes...")
     
-    # Lendo a partir da raiz do projeto
+    # lendo a partir da raiz do projeto
     df_pedidos = pd.read_csv('data/raw/pedidos.csv')
     df_clientes = pd.read_csv('data/raw/clientes.csv')
 

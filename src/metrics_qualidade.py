@@ -33,7 +33,6 @@ def gerar_visao_fornecedores():
     
     print("  Calculando o ranking de fornecedores...")
     
-    # Olha a mágica do .size() aqui:
     ranking_fornecedores = df_problemas.groupby('fornecedor').size().reset_index()
     ranking_fornecedores = ranking_fornecedores.rename(columns={0: 'qtd_chamados'})
     ranking_fornecedores = ranking_fornecedores.sort_values(by='qtd_chamados', ascending=False)

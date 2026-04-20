@@ -6,7 +6,7 @@ def gerar_visao_lucratividade():
     df_itens = pd.read_csv('data/raw/itens_pedido.csv')
     df_produtos = pd.read_csv('data/raw/produtos.csv')
 
-    # Cruzamento para obter o custo e a categoria de cada item vendido
+    # cruzamento para obter o custo e a categoria de cada item vendido
     df_margem = pd.merge(
         df_itens,
         df_produtos,
