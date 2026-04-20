@@ -1,3 +1,7 @@
 .venv
 
+/processed/*
+/interim/*
+
+
 __pycache__
