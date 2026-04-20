@@ -1,7 +1,9 @@
 .venv
 
 /processed/*
-/interim/*
+!/processed/.gitkeep
 
+/interim/*
+!/interim/.gitkeep
 
 __pycache__
