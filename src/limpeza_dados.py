@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 def executar_limpeza():
-    print(">>> [Q6] INICIANDO LIMPEZA E TRATAMENTO DE DADOS (DATA QUALITY)")
+    print(">>> INICIANDO LIMPEZA E TRATAMENTO DE DADOS (DATA QUALITY)")
     os.makedirs('data/interim', exist_ok=True)
     
     df_pedidos = pd.read_csv('data/raw/pedidos.csv')

@@ -8,22 +8,20 @@ from metrics_lucratividade import gerar_visao_lucratividade
 
 def main():
     print("\n" + "="*50)
-    print(" PIPELINE DE DADOS - CASE PEERS (ESTÁGIO) ")
+    print(" PIPELINE DE DADOS ")
     print("="*50 + "\n")
     
-    try:
-        
+    try:  
         executar_limpeza()         
         responder_perguntas_pdf()  
         
         
-        print("\n>>> GERANDO BASES DE BI (DIFERENCIAL)...")
+        print("\n>>> GERANDO BASES DE PARA O BI")
         gerar_visao_geografica()
         gerar_visao_fornecedores()
         gerar_visao_lucratividade()
 
         print("\n" + "="*50)
-        print(" 🎉 SUCESSO ABSOLUTO: Case finalizado!")
         print(" Respostas no terminal e arquivos na data/processed/")
         print("="*50 + "\n")
 

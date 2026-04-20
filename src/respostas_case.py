@@ -3,7 +3,7 @@ from scipy import stats
 
 def responder_perguntas_pdf():
     print("\n==================================================")
-    print("   RELATÓRIO DE RESPOSTAS - CASE NOVASHOP (PEERS) ")
+    print("   RELATÓRIO DE RESPOSTAS - CASE NOVASHOP  ")
     print("==================================================\n")
     
     df_pedidos = pd.read_csv('data/interim/pedidos_clean.csv')
@@ -37,18 +37,17 @@ def responder_perguntas_pdf():
     t_stat, p_valor = stats.ttest_ind(vendas_b2c, vendas_b2b, equal_var=False)
     relevante = "SIM" if p_valor < 0.05 else "NÃO"
     print(f"Diferença estatisticamente relevante? {relevante} (p-value: {p_valor:.4f})")
-    print("*(Nota para o PDF: P-value < 0.05 indica que a diferença não é obra do acaso).*")
     
-    print("\n--- P4: Evolução Mensal (Identificação de Picos) ---")
-    
+    # --- P4: Evolução Mensal (Sazonalidade 2023-2024) ---
+    print("\n--- P4: Evolução Mensal (2023-2024) ---")
     df_pedidos['data_pedido'] = pd.to_datetime(df_pedidos['data_pedido'], errors='coerce')
+    # Agrupamento sem o .tail(12) para pegar todo o histórico
     pedidos_por_mes = df_pedidos.dropna(subset=['data_pedido']).groupby(
         df_pedidos['data_pedido'].dt.to_period('M')
-    ).size()
-    print("Volume por mês (Últimos 12 meses):")
-    print(pedidos_por_mes.tail(12))
-    print("*(Nota para o PDF: Analise os meses de maior volume acima para formular a hipótese no documento).*")
+    ).size().sort_index() # .sort_index() garante a ordem cronológica
     
+    print("Série Histórica Completa:")
+    print(pedidos_por_mes)
     
     print("\n--- P5: Canais de Aquisição (Cancelamentos e Ticket) ---")
     total_por_canal = df_p3.groupby('canal_aquisicao').size()
