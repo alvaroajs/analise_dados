@@ -2,7 +2,7 @@ from limpeza_dados import executar_limpeza
 from respostas_case import responder_perguntas_pdf
 
 
-from metrics_financeiras import gerar_visao_geografica
+from vendas_estado import gerar_visao_geografica
 from metrics_qualidade import gerar_visao_fornecedores
 from metrics_lucratividade import gerar_visao_lucratividade
 
