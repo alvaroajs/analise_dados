@@ -1,6 +1,2 @@
 .venv
-
-/data/processed/*.csv
-/data/interim/*.csv
-
 __pycache__

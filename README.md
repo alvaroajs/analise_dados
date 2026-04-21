@@ -1,6 +1,5 @@
 # 📦 NovaShop · Pipeline de Análise de Dados
 
-
 ---
 
 ## Contexto
@@ -8,6 +7,8 @@
 A NovaShop é um e-commerce brasileiro com operações B2C e B2B que enfrenta um problema real: alta taxa de cancelamentos, devoluções crescentes e tickets de suporte sem causa raiz identificada. O objetivo deste projeto é transformar os dados brutos da empresa em evidências que expliquem esses padrões.
 
 A análise cobre mais de **15.000 pedidos**, **3.000 clientes** e múltiplos canais de aquisição — tudo respondido via código Python e visualizado no Looker Studio.
+
+🔗 **[Acessar Dashboard no Looker Studio](https://datastudio.google.com/reporting/41de03f8-8775-495e-b1b0-962110913ebd)**
 
 ---
 
@@ -31,7 +32,12 @@ metrics_extrator/
 │   │   └── base_problemas_suporte.csv
 │   │
 │   └── processed/                  # Saídas finais para o BI
-│       ├── visao_vendas_geografia.csv
+│       ├── p1_status_distribuicao.csv
+│       ├── p2_top10_produtos.csv
+│       ├── p3_ticket_segmento.csv
+│       ├── p4_evolucao_mensal.csv
+│       ├── p5_cancelamento_canal.csv
+│       ├── visao_vendas_estado.csv
 │       ├── ranking_fornecedores_problema.csv
 │       └── visao_lucratividade_categoria.csv
 │
@@ -39,7 +45,7 @@ metrics_extrator/
 │   ├── main.py                     # Ponto de entrada do pipeline
 │   ├── limpeza_dados.py            # Q6 — Tratamento e qualidade dos dados
 │   ├── respostas_case.py           # Q1 a Q5 — Respostas às perguntas do case
-│   ├── metrics_financeiras.py      # BI — Visão geográfica de vendas
+│   ├── vendas_estado.py            # BI — Visão geográfica de vendas por estado
 │   ├── metrics_qualidade.py        # BI — Ranking de fornecedores por chamados
 │   └── metrics_lucratividade.py    # BI — Margem e lucratividade por categoria
 │
@@ -55,7 +61,7 @@ metrics_extrator/
 ### 1. Clone o repositório e entre na pasta
 
 ```bash
-git clone <https://github.com/alvaroajs/analise_dados>
+git clone https://github.com/alvaroajs/analise_dados
 cd metrics_extrator
 ```
 
@@ -92,8 +98,8 @@ Ao finalizar, os arquivos de saída estarão em `data/processed/` — prontos pa
 O `main.py` orquestra tudo em sequência:
 
 1. **Limpeza dos dados** — remove nulos, corrige valores negativos e padroniza textos
-2. **Respostas do case** — calcula as 5 métricas pedidas no PDF e imprime no terminal
-3. **Geração de bases de BI** — cria 3 CSVs enriquecidos para uso em dashboards
+2. **Respostas do case** — calcula as 5 métricas pedidas no PDF e exporta um CSV por pergunta
+3. **Geração de bases de BI** — cria visões consolidadas para uso em dashboards
 
 ---
 
@@ -112,7 +118,7 @@ O ticket B2B é aproximadamente **6x maior** que o B2C. O teste estatístico (We
 O volume mensal oscila em torno de 530–610 pedidos ao longo de quase todo o período — com uma única exceção: **novembro/2023 registrou mais de 2.300 pedidos**, claramente impulsionado pela Black Friday. Fora isso, não há sazonalidade forte, o que indica que a empresa ainda tem oportunidade de criar picos em outras datas estratégicas (Dia das Mães, volta às aulas, etc.).
 
 ### P5 — Canal de aquisição: cancelamentos e ticket médio
-O canal **paid_search** apresenta uma taxa de cancelamento de ~30% — muito acima dos demais canais, que ficam na faixa de 11–12%. Isso sugere desalinhamento entre a promessa do anúncio e a experiência real de compra. Em contrapartida, **redes sociais** lidera em ticket médio, indicando uma base de clientes com maior poder de compra vinda desse canal.
+O canal **Mídia Paga** apresenta uma taxa de cancelamento de ~30% — muito acima dos demais canais, que ficam na faixa de 11–12%. Isso sugere desalinhamento entre a promessa do anúncio e a experiência real de compra. Em contrapartida, **Redes Sociais** lidera em ticket médio, indicando uma base de clientes com maior poder de compra vinda desse canal.
 
 ### P6 — Qualidade dos dados
 Foram identificadas e tratadas as seguintes inconsistências:
@@ -123,15 +129,20 @@ Foram identificadas e tratadas as seguintes inconsistências:
 
 ---
 
-## Bases Geradas para o BI 
+## Bases Geradas para o BI
 
-O pipeline gera três visões consolidadas prontas para uso no Looker Studio:
+O pipeline gera visões consolidadas prontas para uso no Looker Studio:
 
 | Arquivo | Conteúdo |
 |---|---|
-| `visao_vendas_geografia.csv` | Pedidos cruzados com dados de clientes (região, segmento, canal) |
-| `ranking_fornecedores_problema.csv` | Fornecedores ranqueados por volume de tickets de suporte abertos |
-| `visao_lucratividade_categoria.csv` | Faturamento, lucro bruto e margem percentual por categoria de produto |
+| `p1_status_distribuicao.csv` | Volume e percentual de pedidos por status |
+| `p2_top10_produtos.csv` | Top 10 produtos por quantidade vendida e receita |
+| `p3_ticket_segmento.csv` | Ticket médio B2C vs B2B com resultado do teste estatístico |
+| `p4_evolucao_mensal.csv` | Volume de pedidos mês a mês em 2023 e 2024 |
+| `p5_cancelamento_canal.csv` | Taxa de cancelamento e ticket médio por canal de aquisição |
+| `visao_vendas_estado.csv` | Receita, volume e ticket médio agregados por estado |
+| `ranking_fornecedores_problema.csv` | Fornecedores ranqueados por volume de tickets de suporte |
+| `visao_lucratividade_categoria.csv` | Faturamento, lucro bruto e margem percentual por categoria |
 
 ---
 
@@ -147,3 +158,4 @@ six==1.17.0
 ```
 
 ---
+
